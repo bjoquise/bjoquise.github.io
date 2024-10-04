@@ -7567,7 +7567,7 @@ Requirement already satisfied: webencodings in /opt/conda/lib/python3.11/site-pa
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Dataset-1---Stop-and-Search-(Field-Interviews)">Dataset 1 - Stop and Search (Field Interviews)<a class="anchor-link" href="#Dataset-1---Stop-and-Search-(Field-Interviews)">¶</a></h2><p>The first subset that caught my eye was a subset of data collected when individuals are interviewed by NOPD Officers (including individuals stopped for questioning and complainants). I chose this dataset because in my time of growing up on the Westbank, I have heard countless rumors of corruption within NOPD and I feel like this could not be anything to prove that corruption, but could provide statistical evidence on if any car/race/sex plays a role in the amount of stops and the actions after them.</p>
+<h2 id="Dataset-1---Stop-and-Search-(Field-Interviews)">Dataset 1 - Stop and Search (Field Interviews)<a class="anchor-link" href="#Dataset-1---Stop-and-Search-(Field-Interviews)">¶</a></h2><p>The first <a href="https://data.nola.gov/Public-Safety-and-Preparedness/Stop-and-Search-Field-Interviews-/kitu-f4uy/about_data">subset</a> that caught my eye was a subset of data collected when individuals are interviewed by NOPD Officers (including individuals stopped for questioning and complainants). I chose this dataset because in my time of growing up on the Westbank, I have heard countless rumors of corruption within NOPD and I feel like this could not be anything to prove that corruption, but could provide statistical evidence on if any car/race/sex plays a role in the amount of stops and the actions after them.</p>
 <p>I figured that there could some statistical trends to identify once I began to sift through the data and make different models, such as:</p>
 <ol>
 <li><p>What is the distribution of stops by race and gender, and how do the actions taken reflect after that distribution?</p>
@@ -8175,13 +8175,148 @@ images	Lab02  Lab04  Lab06  Lab09  Lab11  Lab13  README.md
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b8bd36cf-9450-42ff-b5d4-1e18da787f7a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Example Analysis 1 :</strong> Which district has the highest number of stops?</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1cbd3040-610d-48d0-b7cc-a52608ab1c28">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">stops_by_district</span> <span class="o">=</span> <span class="n">pstops_df</span><span class="p">[</span><span class="s1">'District'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stops_by_district</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>District
+8    127470
+3    107212
+6     90387
+7     76424
+2     74692
+5     74453
+1     72215
+4     63442
+Name: count, dtype: int64
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cd6077c6-6fce-4865-be6e-ae7175c4aea9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Clearly District 8 gets stopped a lot, but then you see <a href="https://nola.gov/nopd/districts/">why</a>...District 8 includes Bourbon and most of Downtown New Orleans, where a lot of traffic, visitors, and foul play may occur.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f65bae21-3433-4d4d-bbf7-b2fe1dd0d87a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Example Analysis:</strong> I chose to highlight my second question for which vehicles are stopped the most. I could make a bar chart showing the top 10 most often stopped:</p>
+<p><strong>Example Analysis 2:</strong> When are the most stops happening at a certain time?</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a7b065f5-eff8-4c34-9f6a-b45a362194bd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">pstops_df</span><span class="p">[</span><span class="s1">'Hour'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">pstops_df</span><span class="p">[</span><span class="s1">'EventDate'</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
+<span class="n">stops_by_hour</span> <span class="o">=</span> <span class="n">pstops_df</span><span class="p">[</span><span class="s1">'Hour'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stops_by_hour</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Hour
+0     35944
+1     33873
+2     26101
+3     20899
+4     16901
+5     13388
+6      9895
+7     14686
+8     28000
+9     28758
+10    29384
+11    29190
+12    30473
+13    28714
+14    24628
+15    28733
+16    38984
+17    37368
+18    34649
+19    32997
+20    36016
+21    38740
+22    33993
+23    33981
+Name: count, dtype: int64
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=87c51788-b566-4952-ad9c-363826ed3514">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Early Morning stops begin to decrease but the evening rush seems to give a lot more stops, with the traffic, we can assume. But however, this is New Orleans. The <code>8-10 PM</code> peaks may be because of the several events, DUIs or just more people out on the road.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=df151015-46ef-4951-9c1c-0aaec23d4c97">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Example Analysis 3:</strong> I chose to highlight my second question from the top for which vehicles are stopped the most. I could make a bar chart showing the top 10 most often stopped:</p>
 </div>
 </div>
 </div>
@@ -8297,7 +8432,7 @@ images	Lab02  Lab04  Lab06  Lab09  Lab11  Lab13  README.md
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Dataset-2---NBA-Shot-Selection">Dataset 2 - NBA Shot Selection<a class="anchor-link" href="#Dataset-2---NBA-Shot-Selection">¶</a></h2><p>This dataset (or set of datasets) made my eyes wide because I felt that the possiblities were endless! It is a collection of NBA regular season shot location data from the 03-04 season to 23-24.</p>
+<h2 id="Dataset-2---NBA-Shot-Selection">Dataset 2 - NBA Shot Selection<a class="anchor-link" href="#Dataset-2---NBA-Shot-Selection">¶</a></h2><p>This <a href="https://www.kaggle.com/datasets/mexwell/nba-shots?resource=download">dataset</a> (or set of datasets) made my eyes wide because I felt that the possiblities were endless! It is a collection of NBA regular season shot location data from the 03-04 season to 23-24.</p>
 <p>This one required a bit more work to create the data to be presented in a tidy data instance.</p>
 <p>Some ideas I had for analysis included:</p>
 <ol>
@@ -8752,13 +8887,120 @@ Also, wanted the year to be not the last column read.</p>
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9d809d23-708b-40bf-b4ec-698e550f94af">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Example Analysis 1:</strong></p>
+<p>Does the shooting accuracy decline as the game progresses?</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8b6e3965-eb3d-4440-b401-ffa56491fe37">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">quarter_accuracy</span> <span class="o">=</span> <span class="n">nba_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'QUARTER'</span><span class="p">)[</span><span class="s1">'SHOT_MADE'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">quarter_accuracy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>QUARTER
+1    0.467157
+2    0.460422
+3    0.457715
+4    0.445597
+5    0.414879
+6    0.407710
+7    0.402154
+8    0.452055
+Name: SHOT_MADE, dtype: float64
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=38414b91-a788-41f2-8b58-f71b43ae72ec">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>This could be interpreted as the accuracy does decline over the game, probably due to them getting tired.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1854e690-a90c-4765-b951-a8a79f65197e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Example Analysis 2:</strong></p>
+<p>Which zones have the highest shooting accuracy? I would guess the center</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=47476d9e-c956-4a64-bfda-44af06160770">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">zone_accuracy</span> <span class="o">=</span> <span class="n">nba_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'ZONE_NAME'</span><span class="p">)[</span><span class="s1">'SHOT_MADE'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">zone_accuracy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>ZONE_NAME
+Back Court           0.027129
+Center               0.524424
+Left Side            0.392638
+Left Side Center     0.367183
+Right Side           0.394322
+Right Side Center    0.369486
+Name: SHOT_MADE, dtype: float64
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=86ed1f3f-e4a8-484a-8c18-f27d6ef3f945">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Example Analysis:</strong></p>
+<p><strong>Example Analysis 3:</strong></p>
 <p>What is the average shooting accuracy across the different zones on the court?</p>
 </div>
 </div>
